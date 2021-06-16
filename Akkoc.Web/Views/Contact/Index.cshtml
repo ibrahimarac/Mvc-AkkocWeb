@@ -1,0 +1,85 @@
+﻿@model Akkoc.Domain.POCO.Message
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@section Styles{
+    <style>
+        iframe {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            display: block;
+        }
+    </style>
+
+}
+
+<section id="content">
+
+
+    @Html.Raw(ViewBag.Location)
+
+
+    @{
+        if (Request.Cookies["sendMessage"] == null)
+        {
+            <div class="container" id="message-container">
+                <div class="row">
+                    <div class="span12">
+                        <h4>Bize mesaj göndermek ister misiniz?</h4>
+
+                        <div id="sendmessage"></div>
+                        <div id="errormessage"></div>
+
+                        <form id="contact-form" method="post" role="form" class="contactForm">
+
+                            <div class="row">
+                                <div class="span4 form-group">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Adınız" })
+                                </div>
+                                <div class="span4 form-group">
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Eposta adresiniz" } })
+                                </div>
+                                <div class="span4 form-group">
+                                    @Html.EditorFor(m => m.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = "Konu" } })
+                                </div>
+                                <div class="span12 margintop10 form-group">
+                                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control", placeholder = "Mesajınız", rows = "12" })
+
+                                    <p>
+                                        <div class="g-recaptcha" data-sitekey="6Lf0FPQUAAAAAMiMMEmInHkn-FX9ziGsbxIq08gj"></div>
+                                    </p>
+
+                                    <p class="text-center">
+                                        <input type="button" class="btn btn-large btn-theme margintop10"
+                                               id="send" href="#" value="Gönder" />
+                                    </p>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            @*<img src="@{Html.RenderAction("GetCapcha", "Home", new { length = 5 }); }" />*@
+        }
+        else
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h4>Mesajınızı kaydettik. En kısa zamanda sizinle iltişim kuracağız.</h4>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+
+</section>

@@ -1,0 +1,96 @@
+﻿@model Akkoc.Domain.VM.ProductWithImage
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ProductModel.CategoryId, (IEnumerable<SelectListItem>)TempData["categories"], "Kategori seçiniz", new
+       {
+           @class = "form-control  select2"
+       })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductModel.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductModel.Price, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m=>m.ProductImage)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ProductModel.Order, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.ProductModel.IsActive)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProductModel.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.ProductModel.Description, new { @class = "form-control", rows = "10", placeholder = "Açıklaması" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-primary" />
+        </div>
+    </div>
+
+</div>
+}
+
+@section Styles{
+
+    @Styles.Render("~/admin/css/select2")
+
+    @Styles.Render("~/admin/css/cropper")
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/admin/js/ckEditor")
+
+    @Scripts.Render("~/admin/js/select2")
+
+    @Scripts.Render("~/admin/js/cropper")
+
+    <script>
+        $.Ck('@Html.NameFor(m=>m.ProductModel.Description)')
+        $.DropDown('select2')
+        $.ImageUpload(57/40)
+    </script>
+
+}
+
+

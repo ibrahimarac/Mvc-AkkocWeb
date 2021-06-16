@@ -1,0 +1,46 @@
+﻿
+@model Product
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="top-wrapper">
+                        <div class="post-heading">
+                            <h3><a href="#">@Model.Name</a></h3>
+                        </div>
+                        <!-- start flexslider -->
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li class="flex-active-slide" data-thumb-alt="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;">
+                                    <img src="~/Content/images/product/thumb/@Model.ProductThumbImage"
+                                         class="img-responsive img-rounded" style="width:50%" alt="@Model.Name" draggable="false">
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        <!-- end flexslider -->
+                    </div>
+                    <p>
+                       @Html.Raw(Model.Description)
+                    </p>
+                </article>
+            </div>
+            <div class="span4">
+                <aside class="right-sidebar">
+                    <div class="widget">
+                        <h5 class="widgetheading">Ürün Bilgileri</h5>
+                        <ul class="folio-detail">
+                            <li><label>Ürün Adı :</label>@Model.Name</li>
+                            <li><label>Kategori :</label> @Model.Category.Name</li>
+                            <li><label>Fiyatı :</label> @Model.Price.ToString("C2")</li>
+                            <li><label>Eklenme Tarihi :</label> @Model.CreateDate.ToString("dd.MM.yyyy")</li>
+                        </ul>
+                    </div>                    
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,186 @@
+﻿@model Akkoc.Domain.VM.StaticWithVideoUpload
+
+
+@using (Html.BeginForm("Edit", "SiteStatic", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.AboutTitle, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.AboutTitle, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.AboutDescription, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.TextAreaFor(model => model.StaticModel.AboutDescription, new { @class = "form-control", rows = "10", placeholder = "Açıklaması" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.PostedFile, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.LogoTitle, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.LogoTitle, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LogoFile, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.LogoFile, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Instagram, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Instagram, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Address, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Address, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Email1, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Email1, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Email2, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Email2, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.SiteMail, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.SiteMail, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.MailUserName, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.MailUserName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.MailPassword, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.MailPassword, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Tel1, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Tel1, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Tel2, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Tel2, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Location, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Location, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.Copyrigth, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.Copyrigth, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.FacebookUrl, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.FacebookUrl, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.InstagramUrl, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.InstagramUrl, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.PinterestUrl, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.StaticModel.PinterestUrl, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaticModel.IsActive, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-7">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.StaticModel.IsActive)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+@section Styles{
+
+    @Styles.Render("~/admin/css/cropper")
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/admin/js/ckEditor")
+
+    @Scripts.Render("~/admin/js/inputmask")
+
+    @Scripts.Render("~/admin/js/cropper")
+
+    <script>
+        $.Ck('@Html.NameFor(m=>m.StaticModel.AboutDescription)')
+
+        $.TelNoMask('@Html.IdFor(m=>m.StaticModel.Tel1)')
+        $.TelNoMask('@Html.IdFor(m=>m.StaticModel.Tel2)')
+
+        $.FileUpload()
+
+        $.ImageUpload()
+    </script>
+
+
+}

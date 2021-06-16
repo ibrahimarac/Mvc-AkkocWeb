@@ -1,0 +1,83 @@
+﻿@model IEnumerable<UserRole>
+
+
+<table class="table table-hover table-striped table-bordered" id="categories">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="row-@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.Raw(item.Description.Length>50?item.Description.Substring(0,50):item.Description)
+                </td>
+                <td>
+                    @((item.IsActive ? "Aktif" : "Pasif"))
+                </td>
+                <td>
+                    <a href="@Url.Action("EditRole","Account", new {id=item.Id })" class="btn btn-success">Güncelle</a>
+                    <a href="#" class="btn btn-danger delete" data-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>
+
+
+@section Scripts{
+
+    
+    
+    @Scripts.Render("~/admin/js/dataTable")
+
+    @Scripts.Render("~/admin/js/jConfirm")
+
+
+
+    <script>
+
+        $().ready(function () {
+
+            $.InitDataTable("categories")
+
+            $(".delete").click(function () {
+                var roleId = $(this).data("id");               
+                $.ShowConfirm("Onay", "Rol kalıcı olarak silinecek. Devam etmek istiyor musunuz?", "Onaylıyorum", function () {
+                    $.Delete("@Url.Action("DeleteRole")", roleId)
+                },"Vazgeçtim")
+
+            })
+        })
+
+    </script>
+
+
+}
+
+@section Styles{
+
+
+    @Styles.Render("~/admin/css/dataTable")
+
+    @Styles.Render("~/admin/css/jConfirm");
+
+
+}

@@ -1,0 +1,36 @@
+﻿@{ 
+    var entities = new Akkoc.DataContext.AkkocContext();
+    var siteStatic = entities.SiteStatics.First();
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="span4">
+        <div class="logo">
+            <a href="/Home/Index"><img src="/Content/images/global/@siteStatic.LogoImage" alt="" class="logo img-responsive" style="width:100px"/></a>
+            <h1>@siteStatic.LogoTitle</h1>
+        </div>
+    </div>
+    <div class="span8">
+        <div class="navbar navbar-static-top">
+            <div class="navigation">
+                <nav>
+                    <ul class="nav topnav">
+                        <li>
+                            <a href="/Home/Index" data-id="1">Ana Sayfa</a>
+                        </li>
+                        <li>
+                            <a href="/Product/Index" data-id="2">Ürünlerimiz</a>
+                        </li>
+                        <li>
+                            <a href="/About/Index" data-id="3">Hakkımızda</a>
+                        </li>
+                        <li>
+                            <a href="/Contact/Index" data-id="4">İletişim </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- end navigation -->
+        </div>
+    </div>
+</div>

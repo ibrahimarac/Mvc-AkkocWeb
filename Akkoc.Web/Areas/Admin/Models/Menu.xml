@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Root>
+  <Menu controller="Home" title="Genel İşlemler">
+    <SubMenu action="Index">Ana Sayfa</SubMenu>
+  </Menu>
+  <Menu controller="Account" title="Kullanıcı Yönetimi">
+    <SubMenu action="CreateUser" roles="admin">Kullanıcı Oluştur</SubMenu>
+    <SubMenu action="ListUsers" roles="admin">Kullanıcı Düzenle</SubMenu>
+  </Menu>
+  <Menu controller="Account" title="Rol Yönetimi">
+    <SubMenu action="CreateRole" roles="admin">Rol Ekle</SubMenu>
+    <SubMenu action="ListRoles" roles="admin">Rolleri Düzenle</SubMenu>
+  </Menu>
+  <Menu controller="Category" title="Kategori İşlemleri">
+    <SubMenu action="Create" roles="admin,user">Yeni Kategori</SubMenu>
+    <SubMenu action="List" roles="admin,user">Kategori İşlemleri</SubMenu>
+  </Menu>
+  <Menu controller="Product" title="Ürün İşlemleri">
+    <SubMenu action="Create" roles="admin,user">Yeni Ürün</SubMenu>
+    <SubMenu action="List" roles="admin,user">Ürün İşlemleri</SubMenu>
+  </Menu>
+  <Menu controller="Slider" title="Slider İşlemleri">
+    <SubMenu action="Create" roles="admin,user">Yeni Slayt</SubMenu>
+    <SubMenu action="List" roles="admin,user">Slider İşlemleri</SubMenu>
+  </Menu>
+  <Menu controller="SiteStatic" title="Site Sabitleri">
+    <SubMenu action="Edit" roles="admin,user">Sabitleri Düzenle</SubMenu>
+  </Menu>
+  
+</Root>

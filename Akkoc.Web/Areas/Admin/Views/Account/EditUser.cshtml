@@ -1,0 +1,97 @@
+﻿@model LoginWithImage
+
+@using (Html.BeginForm("EditUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m=>m.LoginModel.Id)
+
+    @Html.HiddenFor(m=>m.LoginModel.UserName)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(m => m.LoginModel.UserName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.LoginModel.Password, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordConfirm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.PasswordConfirm, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.LoginModel.RoleId, (IEnumerable<SelectListItem>)TempData["roles"], new { @class = "form-control  select2" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LoginModel.Name, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LoginModel.Surname, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostedFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Areas/Admin/Content/images/users/@Model.LoginModel.UserImage" class="img-responsive img-rounded"
+                 style="width:120px;margin-bottom:15px"/>
+            @Html.EditorFor(m => m.PostedFile)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoginModel.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.LoginModel.IsActive)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Styles{
+
+    @Styles.Render("~/admin/css/select2")
+
+    @Styles.Render("~/admin/css/cropper")
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/admin/js/select2")
+
+    @Scripts.Render("~/admin/js/cropper")
+
+    <script>
+        $.DropDown('select2')
+    </script>
+
+}

@@ -1,0 +1,115 @@
+﻿
+@using System.Xml.Linq
+
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToString();
+    var action = ViewContext.RouteData.Values["action"].ToString();
+
+    var loginUser = Session["user"] as LoginUser;
+
+    //Daha önce siteye bağlanan olmamış. Bu nedenle Cache bölümünde saklanan bir menu yok
+
+    IEnumerable<XElement> menus = null;
+
+    //Şu an Cache'de menu ismiyle saklanan bir bilgi yok
+    if (Cache["menu"] == null)
+    {
+        var xmlPath = Server.MapPath("~/Areas/Admin/Models/Menu.xml");
+
+        menus = XDocument.Load(xmlPath).Element("Root").Elements("Menu");
+
+        //Cache["menu"] = menus;
+
+        Cache.Insert("menu", menus, new System.Web.Caching.CacheDependency(xmlPath));
+    }
+    else //cache'de daha önceden oluşturulmuş menu isminde bir veri var
+    {
+        menus = Cache["menu"] as IEnumerable<XElement>;
+    }
+
+
+
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        @foreach (var menu in menus)
+        {
+            var controllerName = menu.Attribute("controller").Value;
+
+            var menuVisible = true;
+
+            //Bu menünün alt menülerinin tümü role attribute'üne sahipse
+            //oturum açan ve yetkisi bu alt menülerden herhangi birini kapsayan
+            //kullanıcılar bu menüyü görebilir.
+            if(!menu.Elements("SubMenu").Any(s=>s.Attribute("roles")==null))
+            {
+                //oturum açılmış mı?
+                if (loginUser == null)
+                {
+                    //oturum açılmamışsa alt menüler yetki gerektirdiğinden
+                    //bu üst menü görülmemeli
+                    menuVisible = false;
+                }
+                else
+                {
+                    //oturum açılmış ama bakalım alt menülerden herhangi biri bu kullanıcının
+                    //yetkisi ile erişilebilir mi
+                    var roles = menu.Elements("SubMenu").Where(s => s.Attribute("roles") != null)
+                        .Select(s => s.Attribute("roles").Value).ToList();
+                    var rolesArray=roles.Aggregate((i, j) => i + "," + j).Split(',');
+                    //Eğer kullanıcının yetkisi herhangi bir alt menüyü görmeye yetiyorsa
+                    //bu üst menü de görülebilir.
+                    if (!rolesArray.Contains(loginUser.Role.RoleName))
+                    {
+                        menuVisible = false;
+                    }
+                }
+            }
+            
+            //eğer bu üst menü görüntülenmeyecekse aşağıdaki kodları çağırma
+            if (!menuVisible)
+            {
+                continue;
+            }
+
+
+            <li class="nav-item has-treeview @((controller==controllerName&&menu.Elements("SubMenu").Count(s=>s.Attribute("action").Value==action)!=0)?"menu-open":"")">
+                <a href="#" class="nav-link @((controller==controllerName&&menu.Elements("SubMenu").Count(s=>s.Attribute("action").Value==action)!=0)?"active":"")">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        @menu.Attribute("title").Value
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+
+                <ul class="nav nav-treeview">
+                    @foreach (var subMenu in menu.Elements("SubMenu"))
+                    {
+                        var actionName = subMenu.Attribute("action").Value;
+                        var subMenuVisible = false;
+                        if (subMenu.Attribute("roles") == null)
+                        {
+                            subMenuVisible = true;
+                        }
+                        else
+                        {
+                            var roles = subMenu.Attribute("roles").Value.Split(',');
+                            if (loginUser != null && roles.Contains(loginUser.Role.RoleName))
+                            {
+                                subMenuVisible = true;
+                            }
+                        }
+                        if (subMenuVisible)
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action(actionName, controllerName)" class="nav-link @((action==actionName&&controller==controllerName)?"active":"")">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>@subMenu.Value</p>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                }
+            </li>
+        }
+    </ul>
+}

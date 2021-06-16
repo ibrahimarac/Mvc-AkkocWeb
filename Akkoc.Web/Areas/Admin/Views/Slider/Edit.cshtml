@@ -1,0 +1,94 @@
+﻿@model Akkoc.Domain.VM.SliderWithImage
+
+
+@using (Html.BeginForm("Edit", "Slider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Slider.Title, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Slider.Email, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Slider.Description)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Slider.Detail)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SliderImage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Content/images/slider/@Model.Slider.SliderImage"
+                 class="img-responsive img-rounded img-fluid" style="margin-bottom:30px;width:200px" />
+            @Html.EditorFor(model => model.SliderImage, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Slider.Order, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slider.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Slider.IsActive)
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.Slider.Id)
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+
+@section Styles{
+
+    @Styles.Render("~/admin/css/cropper")
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/admin/js/ckEditor")
+
+    @Scripts.Render("~/admin/js/cropper")
+
+    <script>
+        $.Ck('@Html.NameFor(m=>m.Slider.Description)')
+        $.Ck('@Html.NameFor(m=>m.Slider.Detail)')
+
+        $.ImageUpload()
+    </script>
+
+}

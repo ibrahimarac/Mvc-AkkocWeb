@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<Slider>
+
+<section id="featured">
+    <!-- start slider -->
+    <div id="da-slider" class="da-slider">
+
+        @{
+            foreach (var slider in Model)
+            {
+                <div class="da-slide">
+                    <h2>@slider.Title</h2>
+                    <p>
+                        @Html.Raw(slider.Description)
+                    </p>
+                    @Html.ActionLink("Detaylar","Detail","Slider",new {title=slider.Title.ToLegalString() },new {@class= "da-link" })
+                    <div class="da-img">
+                        <img src="/Content/images/slider/@slider.SliderImage" alt="image01" />
+                    </div>
+                </div>
+            }
+        }
+
+        <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+        </nav>
+    </div>
+    <!-- end slider -->
+</section>

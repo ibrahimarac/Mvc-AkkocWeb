@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Admin Paneline Hoşgeldiniz";
+}
+
+@{ 
+    if(Session["user"]!=null)
+    {
+        var user = Session["user"] as LoginUser;
+        <p>Sayın <b>@user.Name @user.Surname</b> hoşgeldiniz.</p>
+        <p>Sisteme son giriş tarihiniz <strong>@user.LastLoginDate</strong></p>
+    }
+}
+
+<p>
+    Yetkili kullanıcılar Admin panelinde site verilerini düzenleyebilir.
+</p>

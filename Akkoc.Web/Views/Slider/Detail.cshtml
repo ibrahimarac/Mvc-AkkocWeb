@@ -1,0 +1,31 @@
+﻿@model Akkoc.Domain.POCO.Slider
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h2>@Model.Title</h2>
+                <p>@Html.Raw(Model.Description)</p>
+                <p>@Html.Raw(Model.Detail)</p>
+            </div>
+            <div class="span6">
+                <!-- start flexslider -->
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li class="" data-thumb-alt="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
+                            <img src="~/Content/images/slider/@Model.SliderImage" alt="" draggable="false">
+                        </li>
+                    </ul>
+                </div>
+                <!-- end flexslider -->
+            </div>
+        </div>
+        <!-- divider -->
+        <div class="row">
+            <div class="span12">
+                <div class="solidline">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
